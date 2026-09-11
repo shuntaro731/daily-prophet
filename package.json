@@ -8,11 +8,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "test": "node --test",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.1.0"
+    "astro": "^7.1.0",
+    "kute.js": "^2.2.6",
+    "svg-path-commander": "2.1.11"
   },
   "devDependencies": {
     "sass": "^1.104.0"
