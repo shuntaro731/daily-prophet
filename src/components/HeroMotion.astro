@@ -1,0 +1,78 @@
+---
+import dailyProphetLogo from "../assets/vectors/daily_prophet.svg?url";
+import "../styles/hero-motion.scss";
+
+const framePath = "M 1324.12 756 H 0.12 V 0 H 1324.12 V 756 Z";
+---
+
+<main class="hero-motion" data-hero-stage aria-label="Daily Prophet">
+  <div class="hero-motion__frame" aria-hidden="true">
+    <svg viewBox="0 0 1324 756" preserveAspectRatio="none">
+      <defs>
+        <mask
+          id="daily-prophet-stage-mask"
+          maskUnits="userSpaceOnUse"
+          maskContentUnits="userSpaceOnUse"
+          x="0"
+          y="0"
+          width="1324"
+          height="756"
+        >
+          <rect width="1324" height="756" fill="white" />
+          <path
+            data-hero-ellipse
+            d="M1169.4,261.3c0,28-12.8,54.7-36,79.2c-6.5,6.9-13.9,13.6-22.1,20.1c-9.2,7.4-19.4,14.5-30.5,21.3c-5.6,3.4-11.3,6.8-17.3,10c-11.6,6.3-24,12.3-37.1,18c-6.5,2.8-13.3,5.6-20.2,8.3c-17.3,6.7-35.7,12.9-55,18.6c-7,2.1-14.2,4-21.5,6c-17.5,4.6-35.8,8.7-54.6,12.4c-6.2,1.2-12.5,2.4-18.9,3.5c-21.7,3.8-44.2,7-67.3,9.5c-4.3,0.5-8.5,0.9-12.8,1.3c-31.2,3-63.6,4.8-96.8,5.3c-5.7,0.1-11.4,0.1-17.2,0.1c-44.1,0-87-2.4-127.8-6.8c-6.9-0.8-13.8-1.6-20.6-2.4c-18-2.3-35.6-5-52.8-8.2c-5.3-1-10.5-2-15.7-3c-14.5-2.9-28.5-6-42.2-9.5c-8.3-2.1-16.5-4.3-24.5-6.5c-21.6-6.2-42.1-13-61.2-20.5c-6.8-2.7-13.5-5.4-19.9-8.2c-12.5-5.5-24.4-11.2-35.5-17.2c-11.1-6-21.5-12.3-31.1-18.7c-4.4-3-8.6-6-12.7-9.1c-8.4-6.4-16.1-13-23-19.8c-26-25.7-40.3-54-40.3-83.7c0-41.4,27.9-80.1,76.3-112.8C320.7,88,480.2,47.7,662.1,47.7c166.3,0,314,33.7,406.5,85.8C1131.9,169.1,1169.4,213.4,1169.4,261.3L1169.4,261.3z"
+            fill="black"
+          />
+          <path data-hero-form visibility="hidden" fill="black" />
+        </mask>
+      </defs>
+      <path class="hero-motion__white-frame" d={framePath} mask="url(#daily-prophet-stage-mask)" />
+    </svg>
+  </div>
+
+  <div class="hero-motion__logo">
+    <svg
+      class="hero-motion__logo-image"
+      viewBox="0 0 1374 375"
+      preserveAspectRatio="none"
+      role="img"
+      aria-label="Daily Prophet"
+    >
+      <image
+        href={dailyProphetLogo}
+        x="0"
+        y="0"
+        width="1374"
+        height="375"
+        preserveAspectRatio="none"
+      />
+    </svg>
+  </div>
+</main>
+
+<script>
+  import KUTE from "kute.js";
+  import { createHeroMotionController } from "../lib/hero-motion.js";
+
+  const stage = document.querySelector("[data-hero-stage]");
+  const ellipse = document.querySelector("[data-hero-ellipse]");
+  const form = document.querySelector("[data-hero-form]");
+
+  if (
+    stage instanceof HTMLElement &&
+    ellipse instanceof SVGPathElement &&
+    form instanceof SVGPathElement
+  ) {
+    const motion = createHeroMotionController({
+      kute: KUTE,
+      ellipse,
+      form,
+      getViewport: () => ({ width: window.innerWidth, height: window.innerHeight }),
+      onOpen: () => stage.setAttribute("data-open", "true"),
+    });
+
+    stage.addEventListener("click", () => motion.open());
+    window.addEventListener("resize", motion.resize);
+  }
+</script>
